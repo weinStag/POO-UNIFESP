@@ -3,7 +3,7 @@ My repository for all the projects developed on my object oriented programming  
 
 # Commands to run the project:
 
-```node
+```c++
 
 // If you didn't have typescript make sure to install it globally by running the following code:
 npm install -g typescript
