@@ -1,25 +1,23 @@
 # About
 My repository for all the projects developed on my object oriented programming  course at UNIFESP
 
-# Commands to run TS:
+# Commands to run the project:
 
-## If you didn't have typescript make sure to install it globally by running the following code:
 ```node
+
+// If you didn't have typescript make sure to install it globally by running the following code:
 npm install -g typescript
-```
-## Install Typescript on the target folder to use it locally:
-```node
+
+// Install Typescript on the target folder to use it locally:
 npm install typescript --save-dev
-```
-## Init Typescript by using:
-```node
+
+// Init Typescript by using:
 ./node_modules/typescript/bin/tsc --init
-```
-## Create an output folder and compile:
-```node
+
+// Create an output folder and compile:
 ./node_modules/typescript/bin/tsc --outDir <your-output-folder>
-```
-## Run the index JS file that tsc created on the output folder:
-```node
+
+// Run the index JS file that tsc created on the output folder:
 node out/index.js
+
 ```
