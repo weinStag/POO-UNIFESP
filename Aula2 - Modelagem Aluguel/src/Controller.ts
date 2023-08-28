@@ -3,9 +3,9 @@ import { Rent } from './rent';
 import { User } from './user';
 
 export class Controller {
-    users: User[]
-    bikes: Bike[]
-    rents: Rent[]
+    users: User[] = []
+    bikes: Bike[] = []
+    rents: Rent[] = []
 
     addUser(newUser: User){
         this.users.push(newUser) 
