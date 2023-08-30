@@ -11,15 +11,13 @@ export class Rent {
     ) { }
 
     static create(rents: Rent[], bike: Bike, user: User, startDate: Date, endDate: Date): Rent{
-        const canCreate = Rent.canRent(rents, startDate, endDate)
-        if(canCreate) return new Rent(bike, user, startDate, endDate)
-        throw new Error('Overlapping dates.')
+        const canCreate = Rent.canRent(rents, startDate, endDate);
+        if(canCreate)
+            return new Rent(bike, user, startDate, endDate);
+        throw new Error('Overlapping dates.');
     }
 
     static canRent(rents: Rent[], startDate: Date, endDate: Date): boolean {
-        return !rents.some(rent => {
-            return startDate <= rent.dateTo &&
-                endDate >= rent.dateFrom
-        })
+        return !rents.some(rent => { return startDate <= rent.dateTo && endDate >= rent.dateFrom && !rent.dateReturned })
     }
 }
