@@ -18,6 +18,6 @@ export class Rent {
     }
 
     static canRent(rents: Rent[], startDate: Date, endDate: Date): boolean {
-        return !rents.some(rent => { return startDate <= rent.dateTo && endDate >= rent.dateFrom && !rent.dateReturned })
+        return !rents.some(rent => { return startDate <= rent.dateTo && endDate >= rent.dateFrom })
     }
 }

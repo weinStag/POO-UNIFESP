@@ -50,7 +50,7 @@ export class App{
     }
 
     findBikeRents(bike: Bike): Rent[]{
-        return this.rents.filter(b => b.bike === bike);
+        return this.rents.filter(rent => rent.bike === bike && !rent.dateReturned);
     }
 
     findRent(user: User, bike: Bike){
