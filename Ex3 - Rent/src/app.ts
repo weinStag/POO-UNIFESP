@@ -99,7 +99,7 @@ export class App{
 
     AuthUser(email: string, password: string){
         const user = this.findUserByEmail(email);
-        if(compare(password, user.password))
+        if(this.comparePassword(password, user.password))
             return user;
         throw new Error('Invalid password');
     }
