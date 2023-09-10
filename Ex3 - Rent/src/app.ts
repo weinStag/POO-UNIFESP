@@ -1,6 +1,7 @@
 import { Bike } from "./bike";
 import { Rent } from "./rent";
 import { User } from "./user";
+import { hash, compare } from 'bcrypt';
 
 export class App{
     users: User[] = [];
@@ -9,11 +10,13 @@ export class App{
 
     // CREATE REGION
 
-    registerUser(newUser: User){
+    async registerUser(newUser: User){
         const isAnUser = this.users.some(user => { return user.email === newUser.email });
         if(isAnUser)
             throw new Error('Your email is already registered.');
         newUser.id = crypto.randomUUID();
+        const newPassword = await hash(newUser.password, 10);
+        newUser.password = newPassword;
         this.users.push(newUser);
     }
 
@@ -94,4 +97,14 @@ export class App{
 
     // END LIST REGION
 
+    AuthUser(email: string, password: string){
+        const user = this.findUserByEmail(email);
+        if(compare(password, user.password))
+            return user;
+        throw new Error('Invalid password');
+    }
+    
+    comparePassword = async (password: string, hash: string) : Promise<boolean> => {
+        return compare(password, hash)
+    }
 }
