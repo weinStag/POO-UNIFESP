@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Location } from './location';
 
 export class Bike {
   public available = true;
@@ -8,13 +9,11 @@ export class Bike {
     public bodysize: number,
     public maxLoad: number,
     public rate: number,
+    public rentPrice: number,
     public description: string,
     public ratings: number,
     public imageUrls: string[],
-    public location: {
-      latitude: number;
-      longitude: number;
-    },
+    public location: Location,
     public id?: string
   ) {
     this.id = id;
@@ -52,18 +51,17 @@ export class Bike {
       this.location.latitude = newLatitude;
       this.location.longitude = newLongitude;
 
-      const updatedAddress = await this.getLocation();
+      // const updatedAddress = await this.getLocation();
 
-      if (updatedAddress) {
-        console.log(`Bike location updated to: ${updatedAddress}`);
-      } else {
-        console.log('Bike location updated, but address retrieval failed.');
-      }
+      // if (updatedAddress) {
+      //   console.log(`Bike location updated to: ${updatedAddress}`);
+      // } else {
+      //   console.log('Bike location updated, but address retrieval failed.');
+      // }
 
       return true;
     } catch (error) {
-      console.error('Error during location update:', error);
-      return false;
+      throw new Error('Error during location update:' + error);
     }
   }
   

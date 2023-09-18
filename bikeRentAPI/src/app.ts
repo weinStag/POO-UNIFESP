@@ -25,7 +25,10 @@ export class App{
         return newBike.id;
     }
 
-    rentBike(bike: Bike, user: User, date1: Date, date2: Date): void {
+    rentBike(bikeid: string, userEmail: string): void {
+        const bike = this.findBikeById(bikeid);
+        const user = this.findUserByEmail(userEmail);
+
         if(!bike.available) {
             throw new Error('Bike unavaliable')
         }
@@ -40,7 +43,11 @@ export class App{
     }
 
     findBikeById(id: string): Bike{
-        return this.bikes.find(bike => bike.id === id);
+        try {
+            return this.bikes.find(bike => bike.id === id);
+        } catch (error) {
+            throw new Error('Bike not found');
+        }
     }
 
     findBikeRents(bike: Bike): Rent[]{
@@ -59,7 +66,10 @@ export class App{
         this.bikes = this.bikes.filter(b => b.id !== id);
     }
 
-    returnBike(bike: Bike, user: User): number {
+    returnBike(bikeid: string, userEmail: string): number {
+        const bike = this.findBikeById(bikeid);
+        const user = this.findUserByEmail(userEmail);
+
         const currentTime = new Date()
         const rent = this.rents.find(aRent => aRent.bike.id === bike.id && aRent.user.email === user.email && aRent.endDate === undefined)
 
@@ -99,9 +109,6 @@ export class App{
 
     updateBikeLocation = async (bikeid: string, latitude: number, longitude: number) => {
         const bike = this.findBikeById(bikeid);
-        if(!bike){
-            throw new Error('Bike not found');
-        }
         try {
             bike.updateLocation(latitude, longitude);
         } catch (error) {
@@ -112,9 +119,6 @@ export class App{
 
     getBikeLocation = async (bikeid: string) => {
         const bike = this.findBikeById(bikeid);
-        if(!bike){
-            throw new Error('Bike not found');
-        }
         try {
             const address = await bike.getLocation();
             return address;
