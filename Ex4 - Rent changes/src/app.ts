@@ -8,8 +8,6 @@ export class App{
     bikes: Bike[] = [];
     rents: Rent[] = [];
 
-    // CREATE REGION
-
     async registerUser(newUser: User){
         const isAnUser = this.users.some(user => { return user.email === newUser.email });
         if(isAnUser)
@@ -36,10 +34,6 @@ export class App{
         this.rents.push(newRent)
     }
 
-    // END CREATE REGION
-
-    // FIND REGION
-
     findUserByEmail(email: string): User{
         return this.users.find(user => user.email === email);
     }
@@ -55,10 +49,6 @@ export class App{
     findRent(user: User, bike: Bike){
         return this.rents.findIndex(rent => rent.bike === bike && rent.user === user && bike.available === false);
     }
-
-    // END FIND REGION
-
-    // REMOVE REGION
 
     removeUserByEmail(email: string){
         this.users = this.users.filter(b => b.email !== email);
@@ -83,10 +73,6 @@ export class App{
         return rent.bike.rate * timeDiff
     }
 
-    // END REMOVE REGION
-
-    // LIST REGION
-
     listUsers(){
         console.log(this.users);
     }
@@ -98,8 +84,6 @@ export class App{
     listRents(){
         console.log(this.rents);
     }
-
-    // END LIST REGION
 
     AuthUser(email: string, password: string){
         const user = this.findUserByEmail(email);

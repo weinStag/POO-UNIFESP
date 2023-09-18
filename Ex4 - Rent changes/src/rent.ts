@@ -7,5 +7,9 @@ export class Rent {
         public bike: Bike,
         public user: User,
         public startDate: Date,
-    ) {}
+    ) {
+        this.bike = bike
+        this.user = user
+        this.startDate = startDate
+    }
 }
