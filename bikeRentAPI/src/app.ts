@@ -2,6 +2,7 @@ import { Bike } from "./bike";
 import { Rent } from "./rent";
 import { User } from "./user";
 import { hash, compare } from 'bcrypt';
+import crypto  from 'crypto';
 
 export class App{
     users: User[] = [];

@@ -52,7 +52,7 @@ export class Bike {
       this.location.latitude = newLatitude;
       this.location.longitude = newLongitude;
 
-      const updatedAddress = await this.reverseGeocode();
+      const updatedAddress = await this.getLocation();
 
       if (updatedAddress) {
         console.log(`Bike location updated to: ${updatedAddress}`);
@@ -64,23 +64,6 @@ export class Bike {
     } catch (error) {
       console.error('Error during location update:', error);
       return false;
-    }
-  }
-
-  private async reverseGeocode(): Promise<string | null> {
-    try {
-      const response = await axios.get('https://nominatim.openstreetmap.org/reverse', {
-        params: {
-          lat: this.location.latitude,
-          lon: this.location.longitude,
-          format: 'json',
-        },
-      });
-      const address = response.data.display_name;
-      return address;
-    } catch (error) {
-      console.error('Error during reverse geocoding:', error);
-      return null;
     }
   }
   
