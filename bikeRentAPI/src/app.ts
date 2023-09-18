@@ -95,4 +95,31 @@ export class App{
     comparePassword = async (password: string, hash: string) : Promise<boolean> => {
         return compare(password, hash)
     }
+
+    updateBikeLocation = async (bikeid: string, latitude: number, longitude: number) => {
+        const bike = this.findBikeById(bikeid);
+        if(!bike){
+            throw new Error('Bike not found');
+        }
+        try {
+            bike.updateLocation(latitude, longitude);
+        } catch (error) {
+            console.error('Error updating the location:', error);
+            return null;
+        }
+    }
+
+    getBikeLocation = async (bikeid: string) => {
+        const bike = this.findBikeById(bikeid);
+        if(!bike){
+            throw new Error('Bike not found');
+        }
+        try {
+            const address = await bike.getLocation();
+            return address;
+        } catch (error) {
+            console.error('Error getting the location:', error);
+            return null;
+        }
+    }
 }
