@@ -1,33 +1,21 @@
 import axios from 'axios';
-import { Location } from './location';
+import { Location } from "./location";
 
 export class Bike {
-  public available = true;
-  constructor(
-    public name: string,
-    public type: string,
-    public bodysize: number,
-    public maxLoad: number,
-    public rate: number,
-    public rentPrice: number,
-    public description: string,
-    public ratings: number,
-    public imageUrls: string[],
-    public location: Location,
-    public id?: string
-  ) {
-    this.id = id;
-    this.name = name;
-    this.type = type;
-    this.bodysize = bodysize;
-    this.maxLoad = maxLoad;
-    this.rate = rate;
-    this.description = description;
-    this.ratings = ratings;
-    this.imageUrls = imageUrls;
-    this.location = location;
-  }
-
+    constructor(
+        public name: string,
+        public type: string,
+        public bodySize: number,
+        public maxLoad: number,
+        public rate: number,
+        public description: string,
+        public ratings: number,
+        public imageUrls: string[],
+        public available: boolean = true,
+        public location: Location = new Location(0.0, 0.0),
+        public id?: string
+    ) {}
+    
   async getLocation(): Promise<string | null> {
     try {
       const response = await axios.get('https://nominatim.openstreetmap.org/reverse', {
@@ -45,10 +33,9 @@ export class Bike {
     }
   }
 
-  async updateLocation(newLatitude: number, newLongitude: number) {//Promise<boolean> {
+  async updateLocation(newLocation: Location) {//Promise<boolean> {
     try {
-      this.location.latitude = newLatitude;
-      this.location.longitude = newLongitude;
+      this.location = newLocation;
 
       // const updatedAddress = await this.getLocation();
 
