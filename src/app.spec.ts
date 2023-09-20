@@ -5,6 +5,9 @@ import { User } from "./user"
 import { Location } from "./location"
 import { BikeNotFoundError } from "./errors/bike-not-found-error"
 import { UnavailableBikeError } from "./errors/unavailable-bike-error"
+import { DuplicatedUserError } from "./errors/duplicated-user-error"
+import { UserNotFoundError } from "./errors/user-not-found-error"
+import { RentNotFoundError } from "./errors/rent-not-found-error"
 
 describe('App', () => {
     it('should correctly calculate the rent amount', async () => {
@@ -41,6 +44,25 @@ describe('App', () => {
         }).toThrow(BikeNotFoundError)
     })
 
+    it('should throw bike not found error when trying to rent an unregistered bike', () => {
+        const app = new App()
+        const user = new User('Jose', 'jose@mail.com', '1234')
+        expect(() => {
+            app.rentBike('fake-id', user.email)
+        }).toThrow(BikeNotFoundError)
+    })
+
+    it('should throw rent not found error when trying to return a bike that was not rented', async () => {
+        const app = new App()
+        const user = new User('Jose', 'jose@mail.com', '1234')
+        await app.registerUser(user)
+        const bike = new Bike('caloi mountainbike', 'mountain bike', 1234, 1234, 100.0, 'My Bike', 5, [])
+        app.registerBike(bike)
+        expect(() => {
+            app.returnBike(bike.id, user.email)
+        }).toThrow(RentNotFoundError)
+    })
+
     it('should correctly handle bike rent', async () => {
         const app = new App()
         const user = new User('Jose', 'jose@mail.com', '1234')
@@ -65,5 +87,39 @@ describe('App', () => {
         expect(() => {
             app.rentBike(bike.id, user.email)
         }).toThrow(UnavailableBikeError)
+    })
+
+    it('should throw duplicated user error when trying to register a user with an existing email', async () => {
+        const app = new App();
+        const user1 = new User('Jose', 'jose@mail.com', '1234');
+        await app.registerUser(user1);
+        await expect(app.registerUser(user1)).rejects.toThrow(DuplicatedUserError);
+    })
+
+    it('should throw user not found error when trying to find a non existing user', () => {
+        const app = new App();
+        expect(() => {
+            app.findUser('fakeid');
+        }).toThrow(UserNotFoundError);
+    })
+
+    it('should throw user not found error when trying to authenticate a non existing user', async () => {
+        const app = new App();
+        await expect(app.authenticate('fakeid', 'fakepassword')).rejects.toThrow(UserNotFoundError);
+    })
+
+    it('should throw bike not found error when trying to locate a non existing bike', () => {
+        const app = new App();
+        expect(() => {
+            app.findBike('fakeid');
+        }).toThrow(BikeNotFoundError);
+    })
+
+    it('should remove a user', async () => {
+        const app = new App();
+        const user = new User('Jose', 'jose@mail.com', '1234');
+        await app.registerUser(user);
+        app.removeUser(user.email);
+        expect(app.users.length).toEqual(0);
     })
 })

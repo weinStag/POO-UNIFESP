@@ -13,7 +13,7 @@ export class Bike {
         public imageUrls: string[],
         public available: boolean = true,
         public location: Location = new Location(0.0, 0.0),
-        public id?: string
+        public id?: string | null | undefined,
     ) {}
     
   async getLocation(): Promise<string | null> {

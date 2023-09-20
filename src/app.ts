@@ -1,3 +1,4 @@
+import { RentNotFoundError } from './errors/rent-not-found-error';
 import { Bike } from "./bike";
 import { Crypt } from "./crypt";
 import { Rent } from "./rent";
@@ -6,6 +7,8 @@ import { Location } from "./location";
 import crypto from 'crypto'
 import { BikeNotFoundError } from "./errors/bike-not-found-error";
 import { UnavailableBikeError } from "./errors/unavailable-bike-error";
+import { DuplicatedUserError } from "./errors/duplicated-user-error";
+import { UserNotFoundError } from "./errors/user-not-found-error";
 
 export class App {
     users: User[] = []
@@ -15,14 +18,16 @@ export class App {
 
     findUser(email: string): User {
         const user = this.users.find(user => user.email === email)
-        if (!user) throw new Error('User not found.')
+        if (!user){
+            throw new UserNotFoundError();
+        }
         return user
     }
 
     async registerUser(user: User): Promise<string> {
         for (const rUser of this.users) {
             if (rUser.email === user.email) {
-                throw new Error('Duplicate user.')
+                throw new DuplicatedUserError();
             }
         }
         const newId = crypto.randomUUID()
@@ -35,7 +40,9 @@ export class App {
 
     async authenticate(userEmail: string, password: string): Promise<boolean> {
         const user = this.findUser(userEmail)
-        if (!user) throw new Error('User not found.')
+        if (!user){
+            throw new UserNotFoundError();
+        }
         return await this.crypt.compare(password, user.password)
     }
 
@@ -52,7 +59,7 @@ export class App {
             this.users.splice(userIndex, 1)
             return
         }
-        throw new Error('User does not exist.')
+        throw new UserNotFoundError();
     }
     
     rentBike(bikeId: string, userEmail: string): void {
@@ -73,7 +80,9 @@ export class App {
             rent.user.email === userEmail &&
             !rent.end
         )
-        if (!rent) throw new Error('Rent not found.')
+        if (!rent){
+            throw new RentNotFoundError();
+        }
         rent.end = now
         rent.bike.available = true
         const hours = diffHours(rent.end, rent.start)
