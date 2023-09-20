@@ -108,23 +108,21 @@ export class App{
     }
 
     updateBikeLocation = async (bikeid: string, latitude: number, longitude: number) => {
-        const bike = this.findBikeById(bikeid);
         try {
+            const bike = this.findBikeById(bikeid);
             bike.updateLocation(latitude, longitude);
         } catch (error) {
-            console.error('Error updating the location:', error);
-            return null;
+            throw new Error('Error updating the location:' + error)
         }
     }
 
     getBikeLocation = async (bikeid: string) => {
-        const bike = this.findBikeById(bikeid);
         try {
+            const bike = this.findBikeById(bikeid);
             const address = await bike.getLocation();
             return address;
         } catch (error) {
-            console.error('Error getting the location:', error);
-            return null;
+            throw new Error('Error getting the location:' + error);
         }
     }
 }

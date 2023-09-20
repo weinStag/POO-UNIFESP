@@ -41,12 +41,11 @@ export class Bike {
       const address = response.data.display_name;
       return address;
     } catch (error) {
-      console.error('Error during reverse geocoding:', error);
-      return null;
+      throw new Error('Error during reverse geocoding:' + error);
     }
   }
 
-  async updateLocation(newLatitude: number, newLongitude: number): Promise<boolean> {
+  async updateLocation(newLatitude: number, newLongitude: number) {//Promise<boolean> {
     try {
       this.location.latitude = newLatitude;
       this.location.longitude = newLongitude;
