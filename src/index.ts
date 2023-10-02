@@ -1,13 +1,23 @@
+import { App } from "./app";
 import { Bike } from "./bike";
 import { Rent } from "./rent";
 import { User } from "./user";
-import { App } from "./app";
+import sinon from 'sinon'
 
-const app = new App();
-//const bikeid = app.registerBike(new Bike('Bike', 'Mountain', 20, 100, 10, 'A bike', 5, [], { latitude: 0, longitude: 0 }))
+async function main() {
+    // const clock = sinon.useFakeTimers();
+    // const app = new App()
+    // const user1 = new User('Jose', 'jose@mail.com', '1234')
+    // await app.registerUser(user1)
+    // const bike = new Bike('caloi mountainbike', 'mountain bike',
+    //     1234, 1234, 100.0, 'My bike', 5, [])
+    // app.registerBike(bike)
+    // console.log('Bike disponível: ', bike.available)
+    // app.rentBike(bike.id, user1.email)
+    // console.log('Bike disponível: ', bike.available)
+    // clock.tick(1000 * 60 * 65)
+    // console.log(app.returnBike(bike.id, user1.email))
+    // console.log('Bike disponível: ', bike.available)
+}
 
-// app.updateBikeLocation(bikeid, 37.12345, -122.67890);
-
-// console.log(app.findBikeById(bikeid));
-
-//console.log(app.getBikeLocation(bikeid))
+main()
