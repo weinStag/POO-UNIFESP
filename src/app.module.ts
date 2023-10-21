@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { BikeResolver } from './bike/bike.resolver';
 import { UserResolver } from './user/user.resolver';
 import { DatabaseModule } from './database/database.module';
+import { BikeRepository } from './bike/repository/bike.repository';
+import { PrismaService } from './database/service/prisma.service';
 
 @Module({
   imports: [
@@ -25,6 +27,6 @@ import { DatabaseModule } from './database/database.module';
     DatabaseModule,
   ],
   controllers: [],
-  providers: [BikeResolver, UserResolver],
+  providers: [BikeResolver, UserResolver, BikeRepository, PrismaService],
 })
 export class AppModule {}

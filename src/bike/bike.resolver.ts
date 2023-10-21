@@ -8,23 +8,17 @@ export class BikeResolver {
   constructor(private bikeRepository: BikeRepository) {}
 
   @Query(() => [BikeSchema])
-  async findBikeByID(
-    @Args('id', { type: () => String }) id: string,
-  ): Promise<BikeSchema> {
+  async findBikeByID(@Args('id', { type: () => String }) id: string): Promise<BikeSchema> {
     return this.bikeRepository.find(id);
   }
 
   @Mutation(() => BikeSchema)
-  async addBike(
-    @Args('bike', { type: () => BikeInput }) bike: BikeInput,
-  ): Promise<void> {
+  async addBike(@Args('bike', { type: () => BikeInput }) bike: BikeInput): Promise<void> {
     this.bikeRepository.add(bike);
   }
 
   @Mutation(() => BikeSchema)
-  async removeBikeByID(
-    @Args('id', { type: () => String }) id: string,
-  ): Promise<void> {
+  async removeBikeByID(@Args('id', { type: () => String }) id: string): Promise<void> {
     this.bikeRepository.remove(id);
   }
 
@@ -34,9 +28,7 @@ export class BikeResolver {
   }
 
   @Mutation(() => BikeSchema)
-  async updateBike(
-    @Args('bike', { type: () => BikeInput }) bikeNew: BikeInput,
-  ): Promise<void> {
+  async updateBike(@Args('bike', { type: () => BikeInput }) bikeNew: BikeInput): Promise<void> {
     this.bikeRepository.update(bikeNew);
   }
 }
