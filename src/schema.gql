@@ -1,0 +1,113 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input BikeInput {
+  """Bike is active"""
+  active: Boolean!
+
+  """Bike availability"""
+  available: Boolean!
+
+  """Bike description"""
+  description: String!
+
+  """Bike ID"""
+  id: String!
+
+  """Bike Location"""
+  location: String!
+
+  """Bike max weight"""
+  maxWeight: Float!
+
+  """Bike value per hour"""
+  valuePerHour: Float!
+}
+
+type BikeSchema {
+  """Bike is active"""
+  active: Boolean!
+
+  """Bike availability"""
+  available: Boolean!
+
+  """Bike description"""
+  description: String!
+
+  """Bike ID"""
+  id: String!
+
+  """Bike Location"""
+  location: String!
+
+  """Bike max weight"""
+  maxWeight: Float!
+
+  """Bike value per hour"""
+  valuePerHour: Float!
+}
+
+type Mutation {
+  addBike(bike: BikeInput!): BikeSchema!
+  addUser(user: userInput!): userSchema!
+  removeBikeByID(id: String!): BikeSchema!
+  removeUserByEmail(email: String!): userSchema!
+  updateBike(bike: BikeInput!): BikeSchema!
+}
+
+type Query {
+  findBikeByID(id: String!): [BikeSchema!]!
+  findUserByEmail(email: String!): userSchema!
+  listBikes: [BikeSchema!]!
+  listUsers: [userSchema!]!
+}
+
+input userInput {
+  """user active"""
+  active: Boolean!
+
+  """user address"""
+  address: String!
+
+  """user email"""
+  email: String!
+
+  """user ID"""
+  id: String!
+
+  """user name"""
+  name: String!
+
+  """user password"""
+  password: String!
+
+  """user phone"""
+  phone: String!
+
+  """user rg"""
+  rg: String!
+}
+
+type userSchema {
+  """user active"""
+  active: Boolean!
+
+  """user address"""
+  address: String!
+
+  """user email"""
+  email: String!
+
+  """user ID"""
+  id: String!
+
+  """user name"""
+  name: String!
+
+  """user phone"""
+  phone: String!
+
+  """user rg"""
+  rg: String!
+}
