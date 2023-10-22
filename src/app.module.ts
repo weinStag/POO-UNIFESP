@@ -14,6 +14,7 @@ import { RentModule } from './rent/rent.module';
 import { UserRepository } from './user/repository/user.repository';
 import { RentResolver } from './rent/rent.resolver';
 import { RentRepository } from './rent/repository/rent.repository';
+import { ModelModule } from './model/model.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { RentRepository } from './rent/repository/rent.repository';
     UserModule,
     DatabaseModule,
     RentModule,
+    ModelModule,
   ],
   controllers: [],
   providers: [BikeResolver, UserResolver, BikeRepository, PrismaService, UserRepository, RentResolver, RentRepository],
