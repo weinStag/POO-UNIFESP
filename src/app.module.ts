@@ -10,6 +10,10 @@ import { UserResolver } from './user/user.resolver';
 import { DatabaseModule } from './database/database.module';
 import { BikeRepository } from './bike/repository/bike.repository';
 import { PrismaService } from './database/service/prisma.service';
+import { RentModule } from './rent/rent.module';
+import { UserRepository } from './user/repository/user.repository';
+import { RentResolver } from './rent/rent.resolver';
+import { RentRepository } from './rent/repository/rent.repository';
 
 @Module({
   imports: [
@@ -17,7 +21,7 @@ import { PrismaService } from './database/service/prisma.service';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      include: [BikeModule, UserModule],
+      include: [BikeModule, UserModule, DatabaseModule, RentModule],
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       // typePaths: ['./**/*.graphql'],
@@ -25,8 +29,9 @@ import { PrismaService } from './database/service/prisma.service';
     BikeModule,
     UserModule,
     DatabaseModule,
+    RentModule,
   ],
   controllers: [],
-  providers: [BikeResolver, UserResolver, BikeRepository, PrismaService],
+  providers: [BikeResolver, UserResolver, BikeRepository, PrismaService, UserRepository, RentResolver, RentRepository],
 })
 export class AppModule {}

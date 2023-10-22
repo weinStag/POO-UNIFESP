@@ -7,7 +7,7 @@ import { BikeRepository } from './repository/bike.repository';
 export class BikeResolver {
   constructor(private bikeRepository: BikeRepository) {}
 
-  @Query(() => [BikeSchema])
+  @Query(() => BikeSchema)
   async findBikeByID(@Args('id', { type: () => String }) id: string): Promise<BikeSchema> {
     return this.bikeRepository.find(id);
   }

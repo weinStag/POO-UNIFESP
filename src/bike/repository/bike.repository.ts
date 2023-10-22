@@ -4,25 +4,25 @@ import { BikeSchema } from '../schema/bike.schema';
 
 @Injectable()
 export class BikeRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   public async find(id: string): Promise<BikeSchema> {
-    return this.prisma.bike.findUnique({ where: { id } });
+    return this.prismaService.bike.findUnique({ where: { id } });
   }
 
   public async add(bike: BikeSchema): Promise<void> {
-    this.prisma.bike.create({ data: bike });
+    this.prismaService.bike.create({ data: bike });
   }
 
   public async remove(id: string): Promise<void> {
-    this.prisma.bike.delete({ where: { id } });
+    this.prismaService.bike.delete({ where: { id } });
   }
 
   public async list(): Promise<BikeSchema[]> {
-    return this.prisma.bike.findMany();
+    return this.prismaService.bike.findMany();
   }
 
   public async update(bikeNew: BikeSchema): Promise<void> {
-    this.prisma.bike.update({ where: { id: bikeNew.id }, data: bikeNew });
+    this.prismaService.bike.update({ where: { id: bikeNew.id }, data: bikeNew });
   }
 }

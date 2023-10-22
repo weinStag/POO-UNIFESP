@@ -22,4 +22,10 @@ export class BikeSchema {
 
   @Field(() => Float, { description: 'Bike value per hour' })
   valuePerHour: number;
+
+  @Field(() => String, { description: 'Bike model' })
+  modelId: string;
+
+  @Field(() => [MaintenanceSchema], { description: 'Bike maintenances' })
+  maintenances: MaintenanceSchema[];
 }
