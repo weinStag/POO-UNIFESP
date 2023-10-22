@@ -98,6 +98,7 @@ model station {
 }
 
 model station_type {
+  station-type-id      @id @default(uuid())
   station      station @relation(fields: [stationId], references: [id])
   stationId    String  @default(uuid())
   type         type    @relation(fields: [typeId], references: [id])
@@ -105,7 +106,6 @@ model station_type {
   bikeCapacity Int
   description  String
 
-  @@id([stationId, typeId])
 }
 
 model type {
