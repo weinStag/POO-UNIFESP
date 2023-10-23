@@ -7,7 +7,14 @@ export class StationTypeRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async find(stationId: string, typeId: string): Promise<StationTypeSchema> {
-    return this.prismaService.station_type.findUnique({ where: { stationId: stationId, typeId: typeId } });
+    return this.prismaService.station_type.findUnique({
+      where: {
+        stationId_typeId: {
+          stationId: stationId,
+          typeId: typeId,
+        },
+      },
+    });
   }
 
   public async add(stationType: StationTypeSchema): Promise<void> {
@@ -15,7 +22,14 @@ export class StationTypeRepository {
   }
 
   public async remove(stationId: string, typeId: string): Promise<void> {
-    this.prismaService.station_type.delete({ where: { stationId: stationId, typeId: typeId } });
+    this.prismaService.station_type.delete({
+      where: {
+        stationId_typeId: {
+          stationId: stationId,
+          typeId: typeId,
+        },
+      },
+    });
   }
 
   public async list(): Promise<StationTypeSchema[]> {
@@ -24,7 +38,12 @@ export class StationTypeRepository {
 
   public async update(newSationType: StationTypeSchema): Promise<void> {
     this.prismaService.station_type.update({
-      where: { stationId: newSationType.stationId, typeId: newSationType.typeId },
+      where: {
+        stationId_typeId: {
+          stationId: newSationType.stationId,
+          typeId: newSationType.typeId,
+        },
+      },
       data: newSationType,
     });
   }
