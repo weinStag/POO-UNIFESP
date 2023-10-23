@@ -1,4 +1,5 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
+import { ModelSchema } from 'src/model/schema/model.schema';
 
 @ObjectType()
 export class BikeSchema {

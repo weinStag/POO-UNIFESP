@@ -1,5 +1,6 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { BikeSchema } from 'src/bike/schema/bike.schema';
+import { StationSchema } from 'src/station/schema/station.schema';
 import { userSchema } from 'src/user/schema/user.schema';
 
 @ObjectType()
@@ -37,8 +38,8 @@ export class RentSchema {
   @Field({ description: 'Rent station ID' })
   stationId: string;
 
-  @Field(() => stationSchema, { description: 'Rent station' })
-  station?: stationSchema;
+  @Field(() => StationSchema, { description: 'Rent station' })
+  station?: StationSchema;
 
   @Field(() => [MaintenanceSchema], { description: 'Rent maintenances' })
   maintenances?: MaintenanceSchema[];

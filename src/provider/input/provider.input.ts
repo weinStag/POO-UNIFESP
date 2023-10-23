@@ -13,4 +13,7 @@ export class ProviderInput {
 
   @Field({ description: 'Provider country of origin' })
   countryOfOrigin: string;
+
+  @Field({ description: 'Provider active' })
+  active: boolean;
 }

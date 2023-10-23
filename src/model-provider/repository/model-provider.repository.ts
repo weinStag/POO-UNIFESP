@@ -15,7 +15,7 @@ export class ModelProviderRepository {
     return this.prismaService.model_provider.findUnique({ where: { id, modelId, providerId } });
   }
 
-  public async list(): Promise<[ModelProviderSchema]> {
+  public async list(): Promise<ModelProviderSchema[]> {
     return this.prismaService.model_provider.findMany();
   }
 
