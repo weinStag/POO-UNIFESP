@@ -2,6 +2,7 @@ import { Args, Query, Resolver, Mutation } from '@nestjs/graphql';
 import { BikeSchema } from './schema/bike.schema';
 import { BikeInput } from './input/bike.input';
 import { BikeRepository } from './repository/bike.repository';
+import { BikeNotFoundError } from 'src/errors/bike-not-found-error';
 
 @Resolver()
 export class BikeResolver {
@@ -9,11 +10,13 @@ export class BikeResolver {
 
   @Query(() => BikeSchema)
   async findBikeByID(@Args('id', { type: () => String }) id: string): Promise<BikeSchema> {
-    return this.bikeRepository.find(id);
+    const bike = await this.bikeRepository.find(id);
+    if (!bike) throw new BikeNotFoundError();
+    return bike;
   }
 
   @Mutation(() => BikeSchema)
-  async addBike(@Args('bike', { type: () => BikeInput }) bike: BikeInput): Promise<void> {
+  async registerBike(@Args('bike', { type: () => BikeInput }) bike: BikeInput): Promise<void> {
     this.bikeRepository.add(bike);
   }
 

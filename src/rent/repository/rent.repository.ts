@@ -1,3 +1,4 @@
+import { RentInput } from './../input/rent.input';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../database/service/prisma.service';
 import { RentSchema } from '../schema/rent.schema';
@@ -7,14 +8,15 @@ export class RentRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async add(rent: RentSchema): Promise<void> {
-    this.prismaService.rent.create({ data: rent });
+    const rentInput = new RentInput(rent.bike.id, rent.user.id, rent.station.id, new Date());
+    this.prismaService.rent.create({ data: rentInput });
   }
 
   public async findOpen(bikeId: string, userId: string): Promise<RentSchema> {
     return this.prismaService.rent.findFirst({ where: { bikeId, userId, endDate: null } });
   }
 
-  public async update(rent: RentSchema): Promise<void> {
+  public async update(rent: RentInput): Promise<void> {
     this.prismaService.rent.update({ where: { id: rent.id }, data: rent });
   }
 

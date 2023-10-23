@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../database/service/prisma.service';
 import { BikeSchema } from '../schema/bike.schema';
+import { BikeInput } from '../input/bike.input';
 
 @Injectable()
 export class BikeRepository {
@@ -10,7 +11,7 @@ export class BikeRepository {
     return this.prismaService.bike.findUnique({ where: { id } });
   }
 
-  public async add(bike: BikeSchema): Promise<void> {
+  public async add(bike: BikeInput): Promise<void> {
     this.prismaService.bike.create({ data: bike });
   }
 
@@ -22,7 +23,7 @@ export class BikeRepository {
     return this.prismaService.bike.findMany();
   }
 
-  public async update(bikeNew: BikeSchema): Promise<void> {
+  public async update(bikeNew: BikeInput): Promise<void> {
     this.prismaService.bike.update({ where: { id: bikeNew.id }, data: bikeNew });
   }
 }

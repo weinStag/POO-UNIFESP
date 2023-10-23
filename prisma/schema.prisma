@@ -26,12 +26,10 @@ model bike {
 }
 
 model bike_images {
-  id     String @default(uuid())
+  id     String @id @default(uuid())
   url    String
   bike   bike   @relation(fields: [bikeId], references: [id])
   bikeId String
-
-  @@id([id, bikeId])
 }
 
 model maintenance {
