@@ -53,12 +53,12 @@ model model {
 }
 
 model model_provider {
+  id         String   @id @default(uuid())
   model      model    @relation(fields: [modelId], references: [id])
   modelId    String   @default(uuid())
   provider   provider @relation(fields: [providerId], references: [id])
   providerId String   @default(uuid())
 
-  @@id([modelId, providerId])
 }
 
 model provider {

@@ -16,6 +16,9 @@ import { RentResolver } from './rent/rent.resolver';
 import { RentRepository } from './rent/repository/rent.repository';
 import { CryptModule } from './crypt/crypt.module';
 import { BikeImagesModule } from './bike-images/bike-images.module';
+import { ModelModule } from './model/model.module';
+import { ModelProviderModule } from './model-provider/model-provider.module';
+import { ProviderModule } from './provider/provider.module';
 
 @Module({
   imports: [
@@ -34,6 +37,9 @@ import { BikeImagesModule } from './bike-images/bike-images.module';
     RentModule,
     CryptModule,
     BikeImagesModule,
+    ModelModule,
+    ModelProviderModule,
+    ProviderModule,
   ],
   controllers: [],
   providers: [BikeResolver, UserResolver, BikeRepository, PrismaService, UserRepository, RentResolver, RentRepository],
