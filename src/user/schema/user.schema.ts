@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { RentSchema } from 'src/rent/schema/rent.schema';
 
 @ObjectType()
 export class userSchema {
@@ -22,4 +23,10 @@ export class userSchema {
 
   @Field({ description: 'user active' })
   active: boolean;
+
+  @Field({ description: 'user password' })
+  password: string;
+
+  @Field(() => [RentSchema], { description: 'user rents' })
+  rents?: RentSchema[];
 }

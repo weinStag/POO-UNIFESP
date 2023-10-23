@@ -1204,6 +1204,11 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/bcryptjs@^2.4.5":
+  "integrity" "sha512-tOF6TivOIvq+TWQm78335CMdyVJhpBG3NUdWQDAp95ax4E2rSKbws/ELHLk5EBoucwx/tHt3/hhLOHwWJgVrSw=="
+  "resolved" "https://registry.npmjs.org/@types/bcryptjs/-/bcryptjs-2.4.5.tgz"
+  "version" "2.4.5"
+
 "@types/body-parser@*":
   version "1.19.4"
   resolved "https://registry.npmjs.org/@types/body-parser/-/body-parser-1.19.4.tgz"

@@ -22,4 +22,7 @@ export class BikeInput {
 
   @Field(() => Float, { description: 'Bike value per hour' })
   valuePerHour: number;
+
+  @Field(() => String, { description: 'Bike model' })
+  modelId: string;
 }

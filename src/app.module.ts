@@ -14,6 +14,8 @@ import { RentModule } from './rent/rent.module';
 import { UserRepository } from './user/repository/user.repository';
 import { RentResolver } from './rent/rent.resolver';
 import { RentRepository } from './rent/repository/rent.repository';
+import { CryptModule } from './crypt/crypt.module';
+import { BikeImagesModule } from './bike-images/bike-images.module';
 import { ModelModule } from './model/model.module';
 import { ModelProviderModule } from './model-provider/model-provider.module';
 import { ProviderModule } from './provider/provider.module';
@@ -33,6 +35,8 @@ import { ProviderModule } from './provider/provider.module';
     UserModule,
     DatabaseModule,
     RentModule,
+    CryptModule,
+    BikeImagesModule,
     ModelModule,
     ModelProviderModule,
     ProviderModule,

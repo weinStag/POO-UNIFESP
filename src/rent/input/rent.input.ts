@@ -28,4 +28,11 @@ export class RentInput {
 
   @Field({ description: 'Rent station ID' })
   stationId: string;
+
+  constructor(bikeID: string, userID: string, stationID: string, startDate: Date) {
+    this.bikeId = bikeID;
+    this.userId = userID;
+    this.stationId = stationID;
+    this.startDate = startDate;
+  }
 }
