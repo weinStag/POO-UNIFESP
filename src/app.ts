@@ -47,8 +47,8 @@ export class App {
     }
 
     async removeUser(email: string): Promise<void> {
-        if((await this.rentRepo.findOpenRentsFor(email)).length > 0) throw new UserHasOpenRent()
         await this.findUser(email)
+        if((await this.rentRepo.findOpenRentsFor(email)).length > 0) throw new UserHasOpenRent()
         await this.userRepo.remove(email)
     }
 
