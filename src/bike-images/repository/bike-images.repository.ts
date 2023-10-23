@@ -8,23 +8,23 @@ export class BikeImagesRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async add(bikeImages: BikeImagesInput): Promise<void> {
-    this.prismaService.bike_images.create({ data: bikeImages });
+    await this.prismaService.bike_images.create({ data: bikeImages });
   }
 
   public async find(id: string): Promise<BikeImagesSchema> {
-    return this.prismaService.bike_images.findUnique({ where: { id } });
+    return await this.prismaService.bike_images.findUnique({ where: { id } });
   }
 
   public async list(): Promise<BikeImagesSchema[]> {
-    return this.prismaService.bike_images.findMany();
+    return await this.prismaService.bike_images.findMany();
   }
 
   public async remove(id: string): Promise<void> {
-    this.prismaService.bike_images.delete({ where: { id } });
+    await this.prismaService.bike_images.delete({ where: { id } });
   }
 
   public async update(bikeImages: BikeImagesInput): Promise<void> {
-    this.prismaService.bike_images.update({
+    await this.prismaService.bike_images.update({
       where: { id: bikeImages.id },
       data: bikeImages,
     });
