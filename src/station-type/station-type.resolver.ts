@@ -16,7 +16,7 @@ export class StationTypeResolver {
   }
 
   @Mutation(() => StationTypeSchema)
-  async addStn_typ(@Args('stn_typ', { type: () => StationTypeInput }) stn_typ: StationTypeInput): Promise<void> {
+  async addStationType(@Args('stn_typ', { type: () => StationTypeInput }) stn_typ: StationTypeInput): Promise<void> {
     this.stationTypeRepository.add(stn_typ);
   }
 

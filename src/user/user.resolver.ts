@@ -3,17 +3,17 @@ import { UserRepository } from './repository/user.repository';
 import { Args, Query, Resolver, Mutation } from '@nestjs/graphql';
 import { userInput } from './input/user.input';
 import { userSchema } from './schema/user.schema';
-import { CryptResolver } from 'src/crypt/crypt.resolver';
 import { DuplicateUserError } from 'src/errors/duplicate-user-error';
 import { UserNotFoundError } from 'src/errors/user-not-found-error';
 import { WrongPasswordError } from 'src/errors/wrong-password-error';
 import { UserHasOpenRent } from 'src/errors/user-has-open-rent';
+import { CryptService } from 'src/crypt/crypt.service';
 
 @Resolver()
 export class UserResolver {
   constructor(
     private userRepository: UserRepository,
-    private crypt: CryptResolver,
+    private crypt: CryptService,
     private rentRepository: RentRepository,
   ) {}
 

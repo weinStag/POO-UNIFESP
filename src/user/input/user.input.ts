@@ -3,7 +3,7 @@ import { Field, InputType } from '@nestjs/graphql';
 @InputType()
 export class userInput {
   @Field({ description: 'user ID' })
-  id: string;
+  id?: string;
 
   @Field({ description: 'user name' })
   name: string;

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TyperResolver } from './type.resolver';
+import { TypeResolver } from './type.resolver';
+import { PrismaService } from 'src/database/service/prisma.service';
+import { TypeRepository } from './repository/type.repository';
 
 @Module({
-    providers: [TyperResolver],
+  providers: [TypeResolver, PrismaService, TypeRepository],
 })
-export class StationModule {}
+export class TypeModule {}

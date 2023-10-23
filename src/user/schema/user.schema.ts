@@ -4,7 +4,7 @@ import { RentSchema } from 'src/rent/schema/rent.schema';
 @ObjectType()
 export class userSchema {
   @Field({ description: 'user ID' })
-  id: string;
+  id?: string;
 
   @Field({ description: 'user name' })
   name: string;

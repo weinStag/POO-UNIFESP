@@ -8,29 +8,29 @@ export class MaintenanceResolver {
   constructor(private maintenanceRepository: MaintenanceRepository) {}
 
   @Mutation(() => MaintenanceSchema)
-  async addBikeImages(
+  async addMaintenance(
     @Args('maintenance', { type: () => MaintenanceInput }) maintenance: MaintenanceInput,
   ): Promise<void> {
     await this.maintenanceRepository.add(maintenance);
   }
 
   @Query(() => MaintenanceSchema)
-  async findBikeImages(@Args('id', { type: () => String }) id: string): Promise<MaintenanceSchema> {
+  async findMaintenance(@Args('id', { type: () => String }) id: string): Promise<MaintenanceSchema> {
     return await this.maintenanceRepository.find(id);
   }
 
   @Query(() => MaintenanceSchema)
-  async listBikeImages(): Promise<MaintenanceSchema[]> {
+  async listMaintenances(): Promise<MaintenanceSchema[]> {
     return await this.maintenanceRepository.list();
   }
 
   @Mutation(() => MaintenanceSchema)
-  async removeBikeImages(@Args('id', { type: () => String }) id: string): Promise<void> {
+  async removeMaintenance(@Args('id', { type: () => String }) id: string): Promise<void> {
     await this.maintenanceRepository.remove(id);
   }
 
   @Mutation(() => MaintenanceSchema)
-  async updateBikeImages(
+  async updateMaintenance(
     @Args('maintenance', { type: () => MaintenanceInput }) maintenance: MaintenanceInput,
   ): Promise<void> {
     await this.maintenanceRepository.update(maintenance);

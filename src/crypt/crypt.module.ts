@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CryptResolver } from './crypt.resolver';
+import { CryptService } from './crypt.service';
 
 @Module({
-  providers: [CryptResolver],
+  providers: [CryptService],
 })
 export class CryptModule {}
