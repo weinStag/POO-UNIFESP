@@ -8,7 +8,22 @@ export class MaintenanceRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async add(maintenance: MaintenanceInput): Promise<void> {
-    await this.prismaService.maintenance.create({ data: maintenance });
+    const { bikeId, rentId, ...rest } = maintenance;
+    await this.prismaService.maintenance.create({
+      data: {
+        ...rest,
+        bike: {
+          connect: {
+            id: bikeId,
+          },
+        },
+        rent: {
+          connect: {
+            id: rentId,
+          },
+        },
+      },
+    });
   }
 
   public async find(id: string): Promise<MaintenanceSchema> {
