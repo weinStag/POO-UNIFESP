@@ -1,5 +1,6 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { BikeSchema } from 'src/bike/schema/bike.schema';
+import { MaintenanceSchema } from 'src/maintenance/schema/maintenance.schema';
 import { StationSchema } from 'src/station/schema/station.schema';
 import { userSchema } from 'src/user/schema/user.schema';
 

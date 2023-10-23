@@ -1,4 +1,5 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
+import { MaintenanceSchema } from 'src/maintenance/schema/maintenance.schema';
 import { ModelSchema } from 'src/model/schema/model.schema';
 
 @ObjectType()
