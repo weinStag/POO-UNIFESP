@@ -19,6 +19,7 @@ import { BikeImagesModule } from './bike-images/bike-images.module';
 import { ModelModule } from './model/model.module';
 import { ModelProviderModule } from './model-provider/model-provider.module';
 import { ProviderModule } from './provider/provider.module';
+import { MaintenanceModule } from './maintenance/maintenance.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ProviderModule } from './provider/provider.module';
     ModelModule,
     ModelProviderModule,
     ProviderModule,
+    MaintenanceModule,
   ],
   controllers: [],
   providers: [BikeResolver, UserResolver, BikeRepository, PrismaService, UserRepository, RentResolver, RentRepository],
