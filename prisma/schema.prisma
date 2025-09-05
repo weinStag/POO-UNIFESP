@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model bike {
+  id           String        @id @default(uuid())
+  location     String
+  maxWeight    Float
+  description  String
+  available    Boolean
+  active       Boolean
+  valuePerHour Float
+  model        model         @relation(fields: [modelId], references: [id])
+  modelId      String
+  bike_images  bike_images[]
+  maintenances maintenance[]
+  rents        rent[]
+}
+
+model bike_images {
+  id     String @id @default(uuid())
+  url    String
+  bike   bike   @relation(fields: [bikeId], references: [id])
+  bikeId String
+}
+
+model maintenance {
+  id          String   @id @default(uuid())
+  description String
+  value       Float
+  accident    Boolean
+  startDate   DateTime
+  endDate     DateTime
+  bike        bike     @relation(fields: [bikeId], references: [id])
+  bikeId      String
+  rent        rent     @relation(fields: [rentId], references: [id])
+  rentId      String
+}
+
+model model {
+  id               String           @id @default(uuid())
+  name             String
+  bikes            bike[]
+  models_providers model_provider[]
+}
+
+model model_provider {
+  id         String   @id @default(uuid())
+  model      model    @relation(fields: [modelId], references: [id])
+  modelId    String   @default(uuid())
+  provider   provider @relation(fields: [providerId], references: [id])
+  providerId String   @default(uuid())
+
+}
+
+model provider {
+  id               String           @id @default(uuid())
+  name             String
+  description      String
+  countryOfOrigin  String
+  active           Boolean
+  models_providers model_provider[]
+}
+
+model rent {
+  id            String        @id @default(uuid())
+  value         Float
+  startDate     DateTime
+  endDate       DateTime
+  ratingValue   Float
+  ratingComment String
+  bike          bike          @relation(fields: [bikeId], references: [id])
+  bikeId        String
+  user          user          @relation(fields: [userId], references: [id])
+  userId        String
+  station       station       @relation(fields: [stationId], references: [id])
+  stationId     String
+  maintenances  maintenance[]
+}
+
+model station {
+  id             String         @id @default(uuid())
+  name           String
+  location       String
+  active         Boolean
+  stations_types station_type[]
+  rents          rent[]
+}
+
+model station_type {
+  station      station @relation(fields: [stationId], references: [id])
+  stationId    String  @default(uuid())
+  type         type    @relation(fields: [typeId], references: [id])
+  typeId       String  @default(uuid())
+  bikeCapacity Int
+  description  String
+
+  @@id([stationId, typeId])
+}
+
+model type {
+  id             String         @id @default(uuid())
+  description    String
+  stations_types station_type[]
+}
+
+model user {
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+  rg       String  @unique
+  phone    String
+  address  String
+  active   Boolean
+  rents    rent[]
+}
